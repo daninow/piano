@@ -1,23 +1,11 @@
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:collection/collection.dart';
+import 'package:piano/src/notes.dart';
 
 import 'clef.dart';
 import 'note_position.dart';
 import 'note_range.dart';
-
-class NoteImage {
-  final NotePosition notePosition;
-  final double offset;
-  final Color? color;
-
-  NoteImage({
-    required this.notePosition,
-    this.offset = 0.5,
-    this.color,
-  });
-}
 
 class ClefPainter extends CustomPainter with EquatableMixin {
   final Clef clef;
@@ -145,6 +133,42 @@ class ClefPainter extends CustomPainter with EquatableMixin {
 
     for (final noteImage in noteImages) {
       final noteIndex = naturalPositionOf(noteImage.notePosition);
+
+      if (noteImage.noteType == NoteType.QuarterRest) {
+        // Logic for drawing the quarter rest note
+        final restRect = Rect.fromLTWH(
+          bounds.left +
+              clefSize.width +
+              (bounds.width - ovalWidth * 1.5 - clefSize.width) *
+                  noteImage.offset,
+          bounds.height - (noteIndex * noteHeight) - noteHeight / 2,
+          ovalWidth,
+          ovalHeight,
+        );
+
+        final Paint restPaint = Paint()
+          ..color = noteImage.color ?? noteColor
+          ..strokeWidth = 2.0;
+
+        // Draw the squiggly line for the quarter rest
+        canvas.drawLine(
+          restRect.topLeft,
+          restRect.bottomLeft,
+          restPaint,
+        );
+        canvas.drawLine(
+          restRect.bottomLeft,
+          restRect.bottomRight,
+          restPaint,
+        );
+        canvas.drawLine(
+          restRect.bottomRight,
+          restRect.topRight,
+          restPaint,
+        );
+        return;
+      }
+
       if (noteIndex == -1) {
         continue;
       }

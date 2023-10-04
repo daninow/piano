@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:piano/src/notes.dart';
 
 import 'clef.dart';
 import 'clef_painter.dart';
