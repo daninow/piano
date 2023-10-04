@@ -1,9 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 
 import 'note_position.dart';
 import 'note_range.dart';
@@ -433,7 +429,7 @@ class _MaybeScrollbar extends StatelessWidget {
           thumbColor: Colors.grey.shade600,
           radius: Radius.circular(16),
           thickness: 16,
-          isAlwaysShown: true,
+          thumbVisibility: true,
           controller: scrollController,
           child: Container(
               color: Colors.black,
