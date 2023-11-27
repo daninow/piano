@@ -378,7 +378,7 @@ class __PianoKeyState extends State<_PianoKey>
                       color: widget._color,
                       child: InkWell(
                         borderRadius: widget._borderRadius,
-                        highlightColor: Colors.grey,
+                        highlightColor: Colors.grey.shade700,
                         onTap: widget.onTapStart == null ? null : () {},
                         onTapUp: widget.onTapEnd == null
                             ? null
